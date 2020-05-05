@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - LevelObject
+  - powerup
+  - death
+  - obstacletag
+  - medkit
+  - BackGround
+  - bulletcollide
+  - stun
+  - PauseMenu
+  - GameOver
+  - GameOverMenu
+  - ScoreController
+  - bound
+  - MainMneu
+  - Controls
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - boss
+  - Turret
+  - bulletlayer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 1498303485
+    locked: 0

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 79e653e79a7294827bb1d7d7f0a1c81f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - FirePoint: {instanceID: 0}
+  - BossBulletPreFab: {fileID: 1268488254266898, guid: 98b1df1651b28bf47a602879c3048920,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
