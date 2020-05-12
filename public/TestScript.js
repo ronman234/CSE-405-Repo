@@ -20,72 +20,104 @@
     }
 
 
+    function verifyLogin() {
+        var user = firebase.auth().currentUser
+        if (!user.isEmailVerified) {
+            signup_verify.style.display = "block"
+            verify_btn.addEventListener('click', verifyEmail)
+        }
+        else {
+            a_logged_in.style.display = "block"
+            a_logging_in.style.display = "none"
+            a_download_link.style.display = "block"
+            a_logout_btn.addEventListener('click', gLogout)
+            signup_verify.style.display = "none"
+        }
+
+    }
+
     function login() {
-        console.log('Clikced');
+        a_logged_in.style.display = "block"
+        a_logging_in.style.display = "none"
+        a_download_link.style.display = "block"
+        a_logout_btn.addEventListener('click', gLogout)
+        signup_verify.style.display = "none"
+    }
+
+    function gLogin() {
         const email = a_email.value;
         const pass = a_pass.value;
         const auth = firebase.auth();
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
-        promise.catch(e => console.log(e.message))
+        promise.then(function () {
+            login()
+        });
 
-        a_logged_in.style.display = "block"
-        a_msg.innerHTMML = "logged in"
-        a_logging_in.style.display = "none"
-        a_logged_in.style.display = "block"
-        a_logout_btn.addEventListener('click', logout)
-        a_sign_up.addEventListener('click', signup)
     }
 
     function logout() {
-        const auth = firebase.auth();
         a_logging_in.style.display = "block"
         a_logged_in.style.display = "none"
         signup_error.style.display = "none"
-        a_login_btn.addEventListener('click', login)
+        signup_verify.style.display = "none"
+        a_download_link.style.display = "none"
+        a_login_btn.addEventListener('click', gLogin)
         a_sign_up.addEventListener('click', signup)
-        auth.signOut()
     }
 
+    function gLogout() {
+        const auth = firebase.auth();
+        logout();
+        auth.signOut();
+    }
 
     function signup() {
         if (a_email.value == "") {
             signup_error.style.display = "block"
-            console.log('nothing to signup')
         }
         const email = a_email.value;
         const pass = a_pass.value;
         const auth = firebase.auth();
 
         const promise = auth.createUserWithEmailAndPassword(email, pass);
-        promise.catch(e => console.log(e.message))
-        
+        promise.then(function () {
+            verifyLogin()
+        });
+    }
+
+    function verifyEmail() {
+        var user = firebase.auth().currentUser
+        user.sendEmailVerification().then(function () {
+            console.log('email sent')
+            firebase.auth().signOut();
+            logout();
+        }).catch(function (error) {
+            console.log('no email sent')
+        })
     }
 
     document.addEventListener('DOMContentLoaded', () => {
 
         if (true) {
             if (true) {
-                
-                logout();
+                firebase.auth().onAuthStateChanged(firebaseUser => {
+                    if (firebaseUser) {
+                        console.log(firebaseUser)
+                        login();
+                    }
+                    else {
+                        console.log('not logged in')
+                        logout();
+                    }
+                });
             }
         }
         else {
             a_logging_in.style.display = "block"
-            a_login_btn.addEventListener('click', logout)
+            a_login_btn.addEventListener('click', login)
         }
-
 
     })
-
-
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-        if (firebaseUser) {
-            console.log(firebaseUser)
-        }
-        else {
-            console.log('not logged in')
-        }
-    });
 
 } () );
