@@ -1,15 +1,49 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="utf-8" />
-        <title>CSE 405 Web App</title>
-    </head> 
-    <body>
+<head>
+    <meta charset="utf-8" />
+    <title>CSE 405 Web App</title>
+    <script src="/__/firebase/7.14.1/firebase-app.js"></script>
+    <script src="/__/firebase/7.14.1/firebase-auth.js"></script>
+    <script src="/__/firebase/7.14.1/firebase-analytics.js"></script>
+    <script src="/__/firebase/7.14.1/firebase-storage.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="TestScript.js"></script>
+    <script src="storageScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleaheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> 
+<body>
+
+    <h1>Can You Escape JERPA?</h1>
+
+    <div id="a_logging_in" style="display: none">
         <div>
-            <a href= "/JERPA/index.html"> Play Escaping Jerpa </a>
+            Email: <input id="a_email" type="text" />
+            Password: <input id="a_pass" type="password" minlength="8" required />
+            <input id="a_login_btn" type="submit" value="Login In" />
+            <input id="a_sign_up" type="submit" value="Sign Up" />
         </div>
-    </body>
+        <div id="signup_error" style="display:block">
+            Unable to sign up, please check email or password
+        </div>
+    </div>
+
+
+    <div id="a_logged_in" style="display: none">
+        <input id="a_logout_btn" type="submit" value="Logout" />
+    </div>
+
+
+    <div id="downlaod_link" style="display:block">
+
+        <button id="download_btn" class="btn"><i class="fa fa-download"></i> Download</button>   
+        <a href="" id="download_link" download="EcaspingJerpa"></a>
+    </div>
+
+
+</body>
 
 
 
