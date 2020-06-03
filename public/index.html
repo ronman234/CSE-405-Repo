@@ -8,10 +8,12 @@
     <script src="/__/firebase/7.14.1/firebase-auth.js"></script>
     <script src="/__/firebase/7.14.1/firebase-analytics.js"></script>
     <script src="/__/firebase/7.14.1/firebase-storage.js"></script>
+    <script src="/__/firebase/7.14.1/firebase-database.js"></script>
     <script src="/__/firebase/init.js"></script>
     <script src="TestScript.js"></script>
     <script src="storageScript.js"></script>
-    <link rel="stylesheet" type="text/css" href="styleaheet.css">
+    <script src="dataBase.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head> 
 <body>
@@ -22,7 +24,9 @@
         To downlaod the Android build, please sign in or sign up below with your email
     </div>
 
-    <div id="signup_verify" style= "display: none">
+    <div id="signin_thanks" style="display:none"> Thank you for signing u for this game. I hope you enjoy and look forward to better additions to this game</div>
+
+    <div id="signup_verify" style="display: none">
         Please verify your email adress here <button id="verify_btn"> Verify </button>
     </div>
 
@@ -45,9 +49,14 @@
 
 
     <div id="a_download_link" style="display:none">
-        <button id="download_btn" class="btn"><i class="fa fa-download"></i> Download</button>   
+        <button id="download_btn" class="btn"><i class="fa fa-download"></i> Download</button>
         <a href="" id="download_link" download="EcaspingJerpa"></a>
     </div>
+
+
+
+    <ol id="score_list">
+    </ol>
 
 
 </body>

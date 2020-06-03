@@ -16,8 +16,19 @@ h1
     font: 28px Arial, sans-serif;
 }
 
-#download_link
+#a_download_link
 {
     text-align: left justify;
     padding-top: 250 px;
+}
+
+#download_info
+{
+    font: 20px Arial, sans-serif;
+}
+
+#future_updates
+{
+    text-align: center;
+    padding-top: 500px;
 }

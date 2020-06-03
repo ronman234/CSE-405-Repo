@@ -27,11 +27,8 @@
             verify_btn.addEventListener('click', verifyEmail)
         }
         else {
-            a_logged_in.style.display = "block"
-            a_logging_in.style.display = "none"
-            a_download_link.style.display = "block"
-            a_logout_btn.addEventListener('click', gLogout)
-            signup_verify.style.display = "none"
+            console.log('verified')
+            login()
         }
 
     }
@@ -39,6 +36,8 @@
     function login() {
         a_logged_in.style.display = "block"
         a_logging_in.style.display = "none"
+        download_info.style.display = "none"
+        signin_thanks.style.display = "block"
         a_download_link.style.display = "block"
         a_logout_btn.addEventListener('click', gLogout)
         signup_verify.style.display = "none"
@@ -50,6 +49,15 @@
         const auth = firebase.auth();
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
+        promise.catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                errorLogin.style.display = "block"
+            } else {
+                alert(errorMessage);
+            }
+        });
         promise.then(function () {
             login()
         });
@@ -62,6 +70,10 @@
         signup_error.style.display = "none"
         signup_verify.style.display = "none"
         a_download_link.style.display = "none"
+
+        download_info.style.display = "block"
+        signin_thanks.style.display = "none"
+
         a_login_btn.addEventListener('click', gLogin)
         a_sign_up.addEventListener('click', signup)
     }
@@ -81,6 +93,16 @@
         const auth = firebase.auth();
 
         const promise = auth.createUserWithEmailAndPassword(email, pass);
+        promise.catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode == 'auth/email-already-in-use') {
+                //alert('This email is already in use.');
+                signupError_user.style.display = "block";
+            } else {
+                alert(errorMessage);
+            }
+        });
         promise.then(function () {
             verifyLogin()
         });
@@ -101,16 +123,22 @@
 
         if (true) {
             if (true) {
-                firebase.auth().onAuthStateChanged(firebaseUser => {
-                    if (firebaseUser) {
-                        console.log(firebaseUser)
-                        login();
-                    }
-                    else {
-                        console.log('not logged in')
-                        logout();
-                    }
-                });
+                if (!firebase.auth().currentUser) {
+                    console.log('no users')
+                    logout();
+                }
+                else {
+                    firebase.auth().onAuthStateChanged(firebaseUser => {
+                        if (firebaseUser.isEmailVerified) {
+                            console.log(firebaseUser)
+                            login();
+                        }
+                        else {
+                            console.log('verified')
+                            //logout();
+                        }
+                    });
+                }
             }
         }
         else {
@@ -120,4 +148,5 @@
 
     })
 
-} () );
+
+}());
