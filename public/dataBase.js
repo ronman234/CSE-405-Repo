@@ -17,7 +17,7 @@
         firebase.initializeApp(config);
     }
 
-    var defaultData = firebase.database().ref().child('Score');
+    var defaultData = firebase.database().ref().child('LeaderBoard');
     if (defaultData)
         console.log("Found it sir")
 
@@ -28,35 +28,40 @@
     var html = "";
     console.log(playerNameArr.length)
     defaultData.on('value', snap => {
-        var scoreQuery = firebase.database().ref().child("Score");
-        scoreQuery.orderByKey().once("value")
+        var scoreQuery = firebase.database().ref("LeaderBoard");
+        scoreQuery.orderByChild('Player Score').once("value")
             .then(function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
-                    childSnapshot.forEach(function (innerSnap) {
-                        var innerKey = innerSnap.key;
-                        var innerValue = innerSnap.val();
-                        
-                        playerNameArr.push(innerKey);
-                        playerScoreArr.push(innerValue);
-                    })
+                    childSnapshot.forEach(function (finalShot) {
+                        var childKey = finalShot.val();
+                        //var childScore = finalShot.val();
+                        playerNameArr.push(childKey);
+                        //playerScoreArr.push(childScore);
+                        //console.log(playerNameArr.length)
+                    });
                 });
+                update_score();
             });
-       update_score(snap)
+
     })
 
+    function update_score() {
+        //console.log(playerNameArr)
+        //console.log(playerNameArr.length)
+        //snap.orderByKey().once("value").then(function (liastSnap) {
+        //    listSnap.forEach(function (createList) {
+        //        html += "<li>" + createList.child("Player Name").val() + " : " + createList.child("Player Score").val() + "</li>";
+        //    })
+        //})
 
-    function update_score(snap) {
-        console.log(snap.val())
-        console.log(playerScoreArr.length)
-        for (i = 0; i < playerScoreArr.length - 1; i+=2) {
-
-            html += "<li>" + playerNameArr[i] + " " + playerScoreArr[i] + " : " + playerNameArr[i + 1] + " " + playerScoreArr[i + 1] + "</li>";
-            
+        for (var i = playerNameArr.length - 1; i > 1; i-=2) {
+            html += "<li>" + playerNameArr[i -1] + " : " + playerNameArr[i];
         }
+        //console.log(html);
         playerNameArr.length = 0;
         playerScoreArr.length = 0;
         score_list.innerHTML = html;
-        console.log(playerScoreArr.length)
+        //console.log(playerScoreArr.length)
         html = "";
     }
 

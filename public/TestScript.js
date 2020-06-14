@@ -33,16 +33,6 @@
 
     }
 
-    function login() {
-        a_logged_in.style.display = "block"
-        a_logging_in.style.display = "none"
-        download_info.style.display = "none"
-        signin_thanks.style.display = "block"
-        a_download_link.style.display = "block"
-        a_logout_btn.addEventListener('click', gLogout)
-        signup_verify.style.display = "none"
-    }
-
     function gLogin() {
         const email = a_email.value;
         const pass = a_pass.value;
@@ -64,24 +54,37 @@
 
     }
 
+    function login() {
+        a_logged_in.style.display = "block"
+        a_logging_in.style.display = "none"
+        download_info.style.display = "none"
+        signin_thanks.style.display = "block"
+        a_download_link.style.display = "block"
+        a_logout_btn.addEventListener('click', gLogout)
+        signup_verify.style.display = "none"
+        score_list.style.display = "block"
+    }
+
+
+    function gLogout() {
+        const auth = firebase.auth();
+        logout();
+        auth.signOut();
+    }
+
     function logout() {
         a_logging_in.style.display = "block"
         a_logged_in.style.display = "none"
         signup_error.style.display = "none"
         signup_verify.style.display = "none"
         a_download_link.style.display = "none"
+        score_list.style.display = "none"
 
         download_info.style.display = "block"
         signin_thanks.style.display = "none"
 
         a_login_btn.addEventListener('click', gLogin)
         a_sign_up.addEventListener('click', signup)
-    }
-
-    function gLogout() {
-        const auth = firebase.auth();
-        logout();
-        auth.signOut();
     }
 
     function signup() {

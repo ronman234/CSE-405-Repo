@@ -19,6 +19,8 @@ TagManager:
   - bound
   - MainMneu
   - Controls
+  - database
+  - EndScore
   layers:
   - Default
   - TransparentFX
